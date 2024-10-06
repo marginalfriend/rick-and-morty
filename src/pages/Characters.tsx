@@ -32,7 +32,7 @@ export default function Characters() {
           spacing={6}
           p={4}
         >
-          {data.results.map((character) => (
+          {data.results.map((character: CharacterSchema) => (
             <CharacterCard
               key={character.id}
               name={character.name}
@@ -47,7 +47,13 @@ export default function Characters() {
     );
 }
 
-function CharacterCard({ name, status, species, origin, imageUrl }) {
+function CharacterCard({
+  name,
+  status,
+  species,
+  origin,
+  imageUrl,
+}: CharacterCardProps) {
   return (
     <Box
       borderWidth="1px"
@@ -88,3 +94,17 @@ function CharacterCard({ name, status, species, origin, imageUrl }) {
     </Box>
   );
 }
+
+type CharacterCardProps = {
+  name: string;
+  status: string;
+  species: string;
+  origin: string;
+  imageUrl: string;
+};
+
+type CharacterSchema = CharacterCardProps & {
+  id: number;
+  origin: { name: string; url: string };
+  image: string;
+};
