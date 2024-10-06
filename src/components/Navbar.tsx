@@ -1,5 +1,5 @@
-import { HStack, List, Text } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { HStack, List, ListItem, Text } from "@chakra-ui/react";
+import { Link, useLocation } from "react-router-dom";
 
 const routes = [
   {
@@ -21,6 +21,10 @@ const routes = [
 ];
 
 function Navbar() {
+  const location = useLocation();
+
+  console.log(location.pathname);
+
   return (
     <HStack
       as="nav"
@@ -30,23 +34,32 @@ function Navbar() {
       h="14"
       justify="center"
     >
-      <HStack as="ul" justify="space-around" w="full">
+      <List display="flex" justifyContent="space-around" w="full">
         {routes.map((route) => (
-          <Link to={route.url} key={route.url}>
-            <List>
+          <ListItem
+            bg={location.pathname === route.url ? "green.100" : ""}
+            px="2"
+            py="1"
+            rounded="md"
+          >
+            <Link to={route.url} key={route.url}>
               <Text
                 fontWeight="extrabold"
-                _hover={{
-                  color: "green",
-									textDecor: "underline"
-                }}
+                _hover={
+                  location.pathname !== route.url
+                    ? {
+                        color: "green",
+                        textDecor: "underline",
+                      }
+                    : undefined
+                }
               >
                 {route.label}
               </Text>
-            </List>
-          </Link>
+            </Link>
+          </ListItem>
         ))}
-      </HStack>
+      </List>
     </HStack>
   );
 }
