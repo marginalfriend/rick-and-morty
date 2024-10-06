@@ -33,6 +33,7 @@ function Navbar() {
       w="full"
       h="14"
       justify="center"
+			borderBottomWidth="1px"
     >
       <List display="flex" justifyContent="space-around" w="full">
         {routes.map((route) => (

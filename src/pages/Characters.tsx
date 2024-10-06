@@ -20,31 +20,26 @@ export default function Characters() {
 
   if (error) return `An unexpected error occured: ${error}`;
 
-  if (data)
-    return (
-      <VStack w="full" spacing="4">
-        <Heading as="h1" size="xl">
-          Characters
-        </Heading>
-        {isFetching && "Updating..."}
-        <SimpleGrid
-          columns={{ base: 1, sm: 2, md: 3, lg: 4 }}
-          spacing={6}
-          p={4}
-        >
-          {data.results.map((character: CharacterSchema) => (
-            <CharacterCard
-              key={character.id}
-              name={character.name}
-              status={character.status}
-              species={character.species}
-              origin={character.origin.name}
-              imageUrl={character.image}
-            />
-          ))}
-        </SimpleGrid>
-      </VStack>
-    );
+  return (
+    <VStack w="full" spacing="4">
+      <Heading as="h1" size="xl">
+        Characters
+      </Heading>
+      {isFetching && "Updating..."}
+      <SimpleGrid columns={{ base: 1, sm: 2, md: 3, lg: 4 }} spacing={6} p={4}>
+        {data.results.map((character: CharacterSchema) => (
+          <CharacterCard
+            key={character.id}
+            name={character.name}
+            status={character.status}
+            species={character.species}
+            origin={character.origin.name}
+            imageUrl={character.image}
+          />
+        ))}
+      </SimpleGrid>
+    </VStack>
+  );
 }
 
 function CharacterCard({
